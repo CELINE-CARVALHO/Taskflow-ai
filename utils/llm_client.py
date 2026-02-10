@@ -18,16 +18,19 @@ class LLMClient:
     """
     LLM client with rate limit handling
     """
-    
+ 
     def __init__(self):
+        # 🔥 FORCE-disable proxies injected by Streamlit Cloud
+        for k in ["HTTP_PROXY", "HTTPS_PROXY", "http_proxy", "https_proxy"]:
+            os.environ.pop(k, None)
+
         self.api_key = os.getenv("GROQ_API_KEY")
         if not self.api_key:
             raise ValueError("GROQ_API_KEY not found")
-        
-        self.client = Groq(api_key=self.api_key)
 
-        # Use SMALLER, FASTER model to avoid rate limits
+        self.client = Groq(api_key=self.api_key)
         self.model = os.getenv("GROQ_MODEL", "llama-3.1-8b-instant")
+
 
         
     def call_llm(self, prompt: str, system_message: str = None, max_retries: int = 3) -> Dict[str, Any]:
