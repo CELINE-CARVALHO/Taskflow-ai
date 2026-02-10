@@ -4,14 +4,15 @@ LLM Client with Rate Limit Handling
 import os
 import json
 import time
-from groq import Groq
 from typing import Dict, Any
+from groq import Groq
 from dotenv import load_dotenv
+
 
 load_dotenv()
 
 GROQ_API_KEY = os.getenv("GROQ_API_KEY")
-CHATBOT_API_KEY = os.getenv("CHATBOT_API_KEY")
+# CHATBOT_API_KEY = os.getenv("CHATBOT_API_KEY")
 
 class LLMClient:
     """

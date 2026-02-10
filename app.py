@@ -147,9 +147,9 @@ def init():
         chatbot = EliteChatbot()
         return l, SheetsReader(), SheetClassifierAgent(l), ColumnInterpreterAgent(l), DashboardBuilderAgent(l), chatbot
     except Exception as e:
-        st.error(f"Init error: {e}")
-        st.info("Make sure GROQ_API_KEY and CHATBOT_API_KEY are in .env")
+        st.exception(e)   # 👈 shows full traceback
         st.stop()
+
 
 def load(sr, st_type, s):
     if st_type == "Google Sheets":

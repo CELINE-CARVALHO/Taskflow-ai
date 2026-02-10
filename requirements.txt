@@ -8,4 +8,3 @@ groq==0.4.2
 python-dotenv==1.0.1
 requests==2.31.0
 
-python==3.11
