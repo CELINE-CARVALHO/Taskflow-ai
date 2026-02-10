@@ -2,12 +2,23 @@
 TaskFlow AI - Elite AI-Powered Dashboard
 With ChatGPT-Level Intelligent Chatbot
 """
+
+
+# 🔥 REMOVE Streamlit-injected proxies BEFORE imports
+for k in ("HTTP_PROXY", "HTTPS_PROXY", "http_proxy", "https_proxy"):
+    os.environ.pop(k, None)
+
 import streamlit as st
 import pandas as pd
 import plotly.express as px
 import time
 import sys
 import os
+
+import os
+
+
+
 
 # Add current directory to path
 sys.path.insert(0, os.path.dirname(__file__))
