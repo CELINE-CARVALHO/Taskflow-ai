@@ -278,8 +278,23 @@ def main():
                 cn = cm.get(ch.get('dimension', 'status'), 'none')
                 if cn != 'none' and cn in ud.columns:
                     with cs[idx % 2]:
-                        vc = ud[cn].value_counts()
-                        fig = px.pie(values=vc.values, names=vc.index, hole=0.4) if ch.get('type') == 'pie' else px.bar(x=vc.index, y=vc.values)
+                        vc = ud[cn].value_counts().reset_index()
+                        vc.columns = [cn, "count"]
+
+                        if ch.get('type') == 'pie':
+                            fig = px.pie(
+                                vc,
+                                names=cn,
+                                values="count",
+                                hole=0.4
+                            )
+                        else:
+                            fig = px.bar(
+                                vc,
+                                x=cn,
+                                y="count"
+                            )
+
                         if ch.get('type') != 'pie':
                             fig.update_traces(marker_color='#667eea')
                         fig.update_layout(title=cn, height=350)
